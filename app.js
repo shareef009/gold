@@ -54,7 +54,7 @@ function renderOrders() {
             <td>${order.ouncePrice.toFixed(2)} USD</td>
             <td>${order.totalValue.toFixed(2)} AED</td>
             <td>${order.profitLoss.toFixed(2)} AED</td>
-            <td><button onclick="closeOrder(${index})">Close</button></td>
+            <td class="actions"><button class="close-btn" onclick="closeOrder(${index})">Close</button></td>
         `;
         orderTable.appendChild(row);
     });
