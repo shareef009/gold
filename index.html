@@ -1,1 +1,181 @@
-I
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gold Trading P/L Tracker</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #003300; /* Single color dark green */
+            color: white;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            background: white;
+            padding: 15px;
+            border: 1px solid #004d00; /* Sharp border */
+            color: #004d00;
+        }
+
+        h2, h3 {
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .live-price {
+            text-align: center;
+            padding: 10px;
+            font-size: 1em;
+            border: 1px solid #004d00; /* Sharp border */
+            background: #f9f9f9;
+            margin-bottom: 15px;
+        }
+
+        .live-price span {
+            color: #b8860b;
+            font-weight: bold;
+        }
+
+        .order-form {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .order-form input, .order-form button {
+            flex: 1;
+            padding: 8px 10px;
+            border: 1px solid #004d00; /* Sharp border */
+            border-radius: 0; /* Remove curves */
+            font-size: 0.9em;
+        }
+
+        .order-form input {
+            appearance: none; /* Completely removes up/down arrows */
+        }
+
+        .order-form button {
+            background: #b8860b; /* Single color gold */
+            color: #004d00;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 0; /* Remove curves */
+            border: 1px solid #004d00;
+            text-align: center;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .order-form button:hover {
+            background: #e1ad01; /* Slightly lighter gold on hover */
+            transform: translateY(-2px);
+        }
+
+        .order-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        .order-table th, .order-table td {
+            text-align: left;
+            padding: 8px;
+            border: 1px solid #004d00; /* Sharp border */
+            font-size: 0.9em;
+        }
+
+        .order-table th {
+            background: #004d00;
+            color: white;
+        }
+
+        .order-table tbody tr:hover {
+            background: #f9f9f9;
+            color: #004d00;
+        }
+
+        .actions button {
+            padding: 5px 10px;
+            background: #b8860b; /* Single color gold */
+            border: 1px solid #004d00; /* Sharp border */
+            border-radius: 0; /* Remove curves */
+            color: #004d00;
+            cursor: pointer;
+            font-size: 0.8em;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .actions button:hover {
+            background: #e1ad01; /* Slightly lighter gold on hover */
+            transform: translateY(-2px);
+        }
+
+        #exportCsv {
+            display: block;
+            margin: 15px auto;
+            padding: 8px 15px;
+            font-size: 0.9em;
+            background: #b8860b; /* Single color gold */
+            color: #004d00;
+            border: 1px solid #004d00; /* Sharp border */
+            border-radius: 0; /* Remove curves */
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        #exportCsv:hover {
+            background: #e1ad01; /* Slightly lighter gold on hover */
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Gold Trading P/L Tracker</h2>
+
+        <div class="live-price">
+            Live Gold Price: <span id="livePrice">Fetching...</span>
+        </div>
+
+        <form id="orderForm" class="order-form">
+            <input type="text" id="ttBars" placeholder="Number of TT Bars" required>
+            <input type="text" id="ouncePrice" placeholder="Ounce Price (USD)" required>
+            <input type="text" id="purchasedFrom" placeholder="Purchased From" required>
+            <input type="text" id="purchasedBy" placeholder="Purchased By" required>
+            <input type="text" id="premium" placeholder="Premium Charges (AED)">
+            <button type="submit">Place Order</button>
+        </form>
+
+        <h3>Active Orders</h3>
+        <table class="order-table">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Purchased From</th>
+                    <th>Purchased By</th>
+                    <th>TT Bars</th>
+                    <th>Ounce Price (USD)</th>
+                    <th>Total Value (AED)</th>
+                    <th>P/L (AED)</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="orderTable">
+                <!-- Dynamic Order Rows -->
+            </tbody>
+        </table>
+
+        <button id="exportCsv">Export Orders to CSV</button>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
